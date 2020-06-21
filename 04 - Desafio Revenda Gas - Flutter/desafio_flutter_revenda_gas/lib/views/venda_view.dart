@@ -1,5 +1,5 @@
-import 'package:desafio_flutter_revenda_gas/controllers/venda_controller.dart';
 import 'package:desafio_flutter_revenda_gas/models/revenda_model.dart';
+import 'package:desafio_flutter_revenda_gas/shareds/functions_shared.dart';
 import 'package:flutter/material.dart';
 
 class VendaView extends StatefulWidget {
@@ -14,7 +14,10 @@ class VendaView extends StatefulWidget {
 }
 
 class _VendaViewState extends State<VendaView> {
-  final _controller = VendaController();
+  // final _controller = VendaController();
+  int qtd = 1;
+  String valorTotal;
+  final FunctionsShared _shared = FunctionsShared();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,6 +164,7 @@ class _VendaViewState extends State<VendaView> {
   }
 
   Widget _valores() {
+    //int qtd;
     return Container(
       color: Colors.white,
       child: Row(
@@ -179,7 +183,7 @@ class _VendaViewState extends State<VendaView> {
               ),
               child: Center(
                 child: Text(
-                  _controller.qtd.toString(),
+                  qtd.toString(),
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -204,7 +208,7 @@ class _VendaViewState extends State<VendaView> {
                   right: 8.0,
                 ),
                 child: Text(
-                  _controller.valorTotal.toString(),
+                  valorTotal ?? _shared.formatCurrency(widget.revenda.preco),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -284,7 +288,7 @@ class _VendaViewState extends State<VendaView> {
               Container(
                   height: 25,
                   width: 90,
-                  color: _controller.cor(widget.revenda.cor),
+                  color: _shared.convertCor(widget.revenda.cor),
                   child: Center(
                     child: Text(
                       widget.revenda.tipo,
@@ -341,7 +345,7 @@ class _VendaViewState extends State<VendaView> {
                           right: 8.0,
                         ),
                         child: Text(
-                          _controller.valorTotal.toString(),
+                          _shared.formatCurrency(widget.revenda.preco),
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -358,7 +362,10 @@ class _VendaViewState extends State<VendaView> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    _controller.decrementarQtd();
+                    if (qtd > 1) {
+                      qtd--;
+                      valorTotal = valor();
+                    }
                   });
                 },
                 child: Container(
@@ -402,7 +409,7 @@ class _VendaViewState extends State<VendaView> {
                     ),
                     child: Center(
                       child: Text(
-                        _controller.qtd.toString(),
+                        qtd.toString(),
                         style: TextStyle(
                           color: Colors.white,
                         ),
@@ -414,7 +421,8 @@ class _VendaViewState extends State<VendaView> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    _controller.incrementQtd();
+                    qtd++;
+                    valorTotal = valor();
                   });
                 },
                 child: Container(
@@ -441,5 +449,10 @@ class _VendaViewState extends State<VendaView> {
         ),
       ),
     );
+  }
+
+  String valor() {
+    var shared = FunctionsShared();
+    return shared.formatCurrency(widget.revenda.preco * qtd);
   }
 }
