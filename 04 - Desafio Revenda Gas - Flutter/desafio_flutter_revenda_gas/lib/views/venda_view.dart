@@ -52,6 +52,10 @@ class _VendaViewState extends State<VendaView> {
             _valores(),
             _informacaoRevenda(),
             _selecaoQtd(),
+            Expanded(
+              child: Container(),
+            ),
+            _botao(),
           ],
         ),
       ),
@@ -175,11 +179,9 @@ class _VendaViewState extends State<VendaView> {
               width: 30,
               height: 30,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: _shared.convertCor(widget.revenda.cor),
                 borderRadius: BorderRadius.circular(100),
-                border: Border.all(
-                  color: Colors.black,
-                ),
+               
               ),
               child: Center(
                 child: Text(
@@ -445,6 +447,38 @@ class _VendaViewState extends State<VendaView> {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _botao() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 20,
+      ),
+      child: GestureDetector(
+        onTap: () => print('click'),
+        child: Container(
+          width: 200,
+          height: 70,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(35),
+            color: Colors.blue[700], //64B5F6 1976D2
+            gradient: LinearGradient(
+              colors: [_shared.convertCor('64B5F6'), _shared.convertCor('1976D2')],
+            ),
+          ),
+          child: Center(
+            child: Text(
+              'IR PARA O PAGAMENTO',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+            ),
           ),
         ),
       ),

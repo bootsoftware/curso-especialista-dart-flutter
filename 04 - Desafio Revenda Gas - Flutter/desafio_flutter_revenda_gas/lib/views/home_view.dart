@@ -1,3 +1,4 @@
+import 'package:desafio_flutter_revenda_gas/models/revenda_model.dart';
 import 'package:desafio_flutter_revenda_gas/repository/revendas_repository.dart';
 import 'package:desafio_flutter_revenda_gas/shareds/functions_shared.dart';
 import 'package:desafio_flutter_revenda_gas/views/venda_view.dart';
@@ -13,16 +14,149 @@ class _HomeViewState extends State<HomeView> {
   //final _controller = HomeController();
   final RevendasRepository repository = RevendasRepository();
   final FunctionsShared _shared = FunctionsShared();
+  bool nota, tempoMedio, melhorPreco;
+  AppBar appBar;
+
   @override
   void initState() {
     super.initState();
-    this.setState(() {
-      //  _controller.loadJson();
-    });
+    nota = false;
+    tempoMedio = false;
+    melhorPreco = true;
+
+    // this.setState(() {
+    //   //  _controller.loadJson();
+    // });
+    // final appBarr = AppBar();
   }
 
   @override
   Widget build(BuildContext context) {
+    appBar = AppBar(
+      elevation: 5,
+      actions: <Widget>[
+        PopupMenuButton(
+          icon: Icon(
+            Icons.swap_vert,
+          ),
+          itemBuilder: (BuildContext context) {
+            return [
+              PopupMenuItem(
+                child: Row(
+                  //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Melhor Avaliação',
+                        style: TextStyle(
+                          color: Color(0xff2196F3),
+                        ),
+                      ),
+                    ),
+                    Checkbox(
+                      value: nota,
+                      onChanged: (bool value) {
+                        setState(() {
+                          nota = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                child: Row(
+                  //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Mais Rápido',
+                        style: TextStyle(
+                          color: Color(0xff2196F3),
+                        ),
+                      ),
+                    ),
+                    Checkbox(
+                      value: nota,
+                      onChanged: (bool value) {
+                        setState(() {
+                          nota = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                child: Row(
+                  //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Mais Barato',
+                        style: TextStyle(
+                          color: Color(0xff2196F3),
+                        ),
+                      ),
+                    ),
+                    Checkbox(
+                      value: nota,
+                      onChanged: (bool value) {
+                        setState(() {
+                          nota = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ];
+          },
+        ),
+        PopupMenuButton(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 12,
+                right: 12,
+              ),
+              child: Text(
+                '?',
+                style: TextStyle(
+                  fontSize: 24,
+                  //  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  child: Text(
+                    'Suporte',
+                    style: TextStyle(
+                      color: Color(0xff2196F3),
+                    ),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: Text(
+                    'Termo de Serviço',
+                    style: TextStyle(
+                      color: Color(0xff2196F3),
+                    ),
+                  ),
+                ),
+              ];
+            }),
+      ],
+      title: Text(
+        'Escolha uma Revenda',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+    );
     return Scaffold(
       backgroundColor: Color(0xffEEEEEE),
       appBar: appBar,
@@ -36,120 +170,6 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
-
-  final appBar = AppBar(
-    elevation: 5,
-    actions: <Widget>[
-      PopupMenuButton(
-        icon: Icon(
-          Icons.swap_vert,
-        ),
-        itemBuilder: (BuildContext context) {
-          return [
-            PopupMenuItem(
-              child: Row(
-                //  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'Melhor Avaliação',
-                      style: TextStyle(
-                        color: Color(0xff2196F3),
-                      ),
-                    ),
-                  ),
-                  Checkbox(
-                    value: false,
-                    onChanged: (bool value) {},
-                  ),
-                ],
-              ),
-            ),
-            PopupMenuItem(
-              child: Row(
-                //  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'Mais Rápido',
-                      style: TextStyle(
-                        color: Color(0xff2196F3),
-                      ),
-                    ),
-                  ),
-                  Checkbox(
-                    value: false,
-                    onChanged: (bool value) {},
-                  ),
-                ],
-              ),
-            ),
-            PopupMenuItem(
-              child: Row(
-                //  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      'Mais Barato',
-                      style: TextStyle(
-                        color: Color(0xff2196F3),
-                      ),
-                    ),
-                  ),
-                  Checkbox(
-                    value: false,
-                    onChanged: (bool value) {},
-                  ),
-                ],
-              ),
-            ),
-          ];
-        },
-      ),
-      PopupMenuButton(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 12,
-              right: 12,
-            ),
-            child: Text(
-              '?',
-              style: TextStyle(
-                fontSize: 24,
-                //  fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.start,
-            ),
-          ),
-          itemBuilder: (BuildContext context) {
-            return [
-              PopupMenuItem(
-                child: Text(
-                  'Suporte',
-                  style: TextStyle(
-                    color: Color(0xff2196F3),
-                  ),
-                ),
-              ),
-              PopupMenuItem(
-                child: Text(
-                  'Termo de Serviço',
-                  style: TextStyle(
-                    color: Color(0xff2196F3),
-                  ),
-                ),
-              ),
-            ];
-          }),
-    ],
-    title: Text(
-      'Escolha uma Revenda',
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-      ),
-    ),
-  );
 
   Widget _endereco() {
     return Container(
@@ -215,12 +235,15 @@ class _HomeViewState extends State<HomeView> {
         child: LayoutBuilder(builder: (_, constraints) {
           //   List<RevendaModel> revendas = _controller.revendas;
           return Container(
-            child: FutureBuilder(
+            child: FutureBuilder<List<RevendaModel>>(
               future: repository.loadJson(),
               builder: (context, snapshot) {
+                //    List<RevendaModel>  revendas = snapshot.data;
                 var revendas = snapshot.data;
+                // revendas = ordenacao(revendas);
 
                 if (snapshot.hasData) {
+                  ordenacao(revendas: revendas);
                   return ListView.builder(
                     itemCount: revendas?.length ?? 0,
                     itemBuilder: (_, index) {
@@ -235,7 +258,7 @@ class _HomeViewState extends State<HomeView> {
                                 builder: (context) => VendaView(revenda: revendas[index]),
                               ),
                             );
-                            print(revendas[index].nome);
+                            //   print(revendas[index].nome);
                           },
                           child: Row(
                             children: <Widget>[
@@ -404,6 +427,25 @@ class _HomeViewState extends State<HomeView> {
         }),
       ),
     );
+  }
+
+  void ordenacao({List<RevendaModel> revendas, String filtro = ''}) {
+    switch (filtro.toUpperCase()) {
+      case 'NOTA':
+        revendas.sort((a, b) {
+          return a.nota.compareTo(b.nota);
+        });
+        break;
+      case 'TEMPOMEDIO':
+        revendas.sort((a, b) {
+          return a.tempoMedio.compareTo(b.tempoMedio);
+        });
+        break;
+      default:
+        revendas.sort((a, b) {
+          return a.preco.compareTo(b.preco);
+        });
+    }
   }
 
   Widget _melhorPreco() {

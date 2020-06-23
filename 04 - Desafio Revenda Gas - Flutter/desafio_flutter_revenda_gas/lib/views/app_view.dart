@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'home_page.dart';
 import 'home_view.dart';
 
 class AppView extends StatelessWidget {
@@ -11,7 +12,7 @@ class AppView extends StatelessWidget {
         primarySwatch: Colors.blue,       
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      home: HomePage(),
     );
   }
 }

@@ -55,4 +55,33 @@
         "preco": 82.9
         
     }
+    ,{
+        "tipo": "Multimarcas",
+        "nome": "Mundial Gás",
+        "cor": "000000",
+        "nota": 4.7,
+        "melhorPreco": false,
+        "tempoMedio": "29-45",
+        "preco": 82.9
+        
+    },{
+        "tipo": "Multimarcas",
+        "nome": "Mundial Gás",
+        "cor": "000000",
+        "nota": 4.7,
+        "melhorPreco": false,
+        "tempoMedio": "28-45",
+        "preco": 82.9
+        
+    }
+    ,{
+        "tipo": "Multimarcas",
+        "nome": "Mundial Gás",
+        "cor": "000000",
+        "nota": 4.7,
+        "melhorPreco": false,
+        "tempoMedio": "20-30",
+        "preco": 82.9
+        
+    }
 ]
