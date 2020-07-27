@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'app/controllers/home_controller.dart';
 import 'app/controllers/new_task_controller.dart';
@@ -7,8 +6,11 @@ import 'app/database/database_adm_connection.dart';
 import 'app/pages/home_page.dart';
 import 'app/pages/new_task_page.dart';
 import 'app/repositories/todos_repository.dart';
+//import 'package:android_alarm_manager/android_alarm_manager.dart';
 
-void main() {
+Future<void> main() async {
+  final int helloAlarmID = 0;
+  // await AndroidAlarmManager.initialize();
   runApp(App());
 }
 

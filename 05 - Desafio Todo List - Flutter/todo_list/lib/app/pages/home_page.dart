@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
     return Consumer<HomeController>(
       builder: (BuildContext context, _controller, _) {
         return Scaffold(
+          floatingActionButton: FloatingActionButton(onPressed: () => _controller.execultar()),
           drawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,

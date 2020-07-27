@@ -1,8 +1,11 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_list/app/models/todo_model.dart';
 import 'package:todo_list/app/repositories/todos_repository.dart';
 import 'package:collection/collection.dart';
+import 'package:android_alarm_manager/android_alarm_manager.dart';
 
 class HomeController extends ChangeNotifier {
   final TodosRepository repository;
@@ -17,8 +20,11 @@ class HomeController extends ChangeNotifier {
   bool excluir = false;
   bool loading = false;
 
+  final int helloAlarmID = 0;
+
   HomeController({@required this.repository}) {
     findAllForWeek();
+
     // repository.saveTodo(DateTime.now().subtract(Duration(days: 3)), 'DAY 3 -');
     // repository.saveTodo(DateTime.now().add(Duration(days: 3)), 'DAY 3 +');
     // repository.saveTodo(DateTime.now(), 'HOJE');
@@ -146,5 +152,17 @@ class HomeController extends ChangeNotifier {
   void delete() {
     excluir = true;
     notifyListeners();
+  }
+
+  Future<void> printHello() async {
+    await AndroidAlarmManager.initialize();
+    final DateTime now = DateTime.now();
+    final int isolateId = Isolate.current.hashCode;
+    print("[$now] Hello, world! isolate=${isolateId} function='$printHello'");
+  }
+
+  Future<void> execultar() async {
+    //printHello();
+    await AndroidAlarmManager.periodic(const Duration(seconds: 10), helloAlarmID, printHello);
   }
 }
